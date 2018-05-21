@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.41" apply false
+    id "org.jetbrains.kotlin.jvm" version "1.2.20" apply false
     id 'io.vertx.vertx-plugin' version '0.0.8' apply false
 }
 
@@ -11,7 +11,8 @@ repositories {
 project.ext {
     kotlinVertxProjects = subprojects.findAll {
         it.name == '1-hello-world' ||
-        it.name == '1.1-hello-world-javascript'
+        it.name == '1.1-hello-world-javascript' ||
+        it.name == '2-rest-api'
     }
 }
 
@@ -48,11 +49,16 @@ configure(project.kotlinVertxProjects) {
         debugPort = 5005L
     }
 
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
     }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+}
+
+subprojects {
+    task wrapper(type: Wrapper) {
+        gradleVersion = '4.7'
     }
 }
 

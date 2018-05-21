@@ -1,0 +1,9 @@
+version 'unspecified'
+
+processResources {
+    from ('client') {into 'client'}
+}
+
+vertx {
+    mainVerticle = "demo.MainVerticle"
+}

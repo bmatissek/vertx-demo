@@ -8,6 +8,9 @@
 /subprojects/docs/src/samples/*/*/build
 /subprojects/internal-android-performance-testing/build-android-libs
 
+# Vertx
+.vertx
+
 # IDEA
 # ----
 .idea
