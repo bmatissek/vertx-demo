@@ -1,0 +1,12 @@
+dependencies {
+    compile 'io.vertx:vertx-lang-js'
+}
+
+processResources {
+    from 'src/main/js'
+}
+
+vertx {
+//    mainVerticle = 'MyJavascriptVerticle.js'
+    mainVerticle = 'demo.MainVerticle'
+}

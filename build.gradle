@@ -3,10 +3,15 @@ plugins {
     id 'io.vertx.vertx-plugin' version '0.0.8' apply false
 }
 
+repositories {
+   jcenter()
+   mavenCentral()
+}
+
 project.ext {
     kotlinVertxProjects = subprojects.findAll {
         it.name == '1-hello-world' ||
-        it.name == '2-demo'
+        it.name == '1.1-hello-world-javascript'
     }
 }
 
