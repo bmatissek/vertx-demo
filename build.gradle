@@ -1,0 +1,54 @@
+buildscript {
+    ext.kotlin_version = '1.2.41'
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.41"
+    id 'io.vertx.vertx-plugin' version '0.0.8'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile "io.vertx:vertx-core"
+    compile 'io.vertx:vertx-lang-kotlin'
+    compile 'io.vertx:vertx-web'
+
+    // Dependência para uso experimental de coroutines
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    compile 'io.vertx:vertx-lang-kotlin-coroutines'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    testCompile 'junit:junit:4.12'
+}
+
+vertx {
+    mainVerticle = 'demo.MainVerticle'
+    vertxVersion = "3.5.1"
+    debugPort = 5005L
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.7'
+}
+
