@@ -1,5 +1,20 @@
-buildscript {
-    ext.kotlin_version = '1.2.41'
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.41" apply false
+    id 'io.vertx.vertx-plugin' version '0.0.8' apply false
+}
+
+project.ext {
+    kotlinVertxProjects = subprojects.findAll {
+        it.name == '1-hello-world' ||
+        it.name == '2-demo'
+    }
+}
+
+configure(project.kotlinVertxProjects) {
+    println(it.group)
+    apply plugin: 'kotlin'
+    apply plugin: 'application'
+    apply plugin: 'io.vertx.vertx-plugin'
 
     repositories {
         jcenter()
@@ -7,45 +22,33 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        compile "io.vertx:vertx-core"
+        compile 'io.vertx:vertx-lang-kotlin'
+        compile 'io.vertx:vertx-web'
+
+        // Dependência para uso experimental de coroutines
+        //compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+        //compile 'io.vertx:vertx-lang-kotlin-coroutines'
+
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+        testCompile 'junit:junit:4.12'
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit"
     }
-}
 
-plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.41"
-    id 'io.vertx.vertx-plugin' version '0.0.8'
-    id 'application'
-}
 
-repositories {
-    jcenter()
-    mavenCentral()
-}
-
-dependencies {
-    compile "io.vertx:vertx-core"
-    compile 'io.vertx:vertx-lang-kotlin'
-    compile 'io.vertx:vertx-web'
-
-    // Dependência para uso experimental de coroutines
-    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
-    compile 'io.vertx:vertx-lang-kotlin-coroutines'
-
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-
-    testCompile 'junit:junit:4.12'
-}
-
-vertx {
-    mainVerticle = 'demo.MainVerticle'
-    vertxVersion = "3.5.1"
-    debugPort = 5005L
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        jvmTarget = "1.8"
+    vertx {
+        vertxVersion = "3.5.1"
+        debugPort = 5005L
     }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
 }
 
 task wrapper(type: Wrapper) {

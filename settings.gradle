@@ -1,0 +1,9 @@
+rootProject.name = 'vertx-demo'
+include '1-hello-world'
+
+if (!JavaVersion.current().java8Compatible) {
+    throw new IllegalStateException('''Error:
+                                    |  This needs Java 8,
+                                    |  You are using something else,
+                                    |  Refresh. Try again.'''.stripMargin())
+}
