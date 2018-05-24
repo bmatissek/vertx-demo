@@ -11,9 +11,6 @@
 # Vertx
 .vertx
 
-# Node
-src/main/js/node_modules
-
 # IDEA
 # ----
 .idea

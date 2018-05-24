@@ -3,8 +3,10 @@ dependencies {
 }
 
 processResources {
-    from 'src/main/js'
+    from('src/main/js')
 }
+
+//processResources.dependsOn(copyDist)
 
 vertx {
 //    mainVerticle = 'MyJavascriptVerticle.js'
