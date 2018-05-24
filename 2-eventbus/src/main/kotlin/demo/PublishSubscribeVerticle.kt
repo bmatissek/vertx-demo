@@ -13,7 +13,8 @@ fun main(args : Array<String>) {
                 println("Undeployment timeout reached for ${res.result()}")
                 vertx.undeploy(res.result())
             })
-        } else {
+        } else
+        {
             println(res.cause())
             vertx.close()
         }
@@ -117,16 +118,6 @@ class SubscribeVerticle(val id: Int) : AbstractVerticle() {
         vertx.eventBus().consumer<Any>("bizzarre.news.feed", {
             val consumerMessage = "${it.body()}"
             println("Consumer ${this.id} - $consumerMessage")
-        })
-
-        vertx.setTimer(2000, {
-            if (this.id == 2) {
-//                try {
-                    throw Exception("Error in SubscribeVerticle")
-//                } catch(e : Exception){
-//                    vertx.undeploy(this.deploymentID())
-//                }
-            }
         })
 
         println("Subscribe ${this.id} verticle deployed")

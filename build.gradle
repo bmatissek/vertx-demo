@@ -12,7 +12,8 @@ project.ext {
     kotlinVertxProjects = subprojects.findAll {
         it.name == '1-hello-world' ||
         it.name == '1.1-hello-world-javascript' ||
-        it.name == '2-eventbus'
+        it.name == '2-eventbus' ||
+        it.name == '3-verticles'
     }
 }
 
