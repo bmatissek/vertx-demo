@@ -11,4 +11,6 @@ include '1-hello-world'
 include '1.1-hello-world-javascript'
 include '2-eventbus'
 include '3-verticles'
+include '4-vertx-coroutines'
+
 

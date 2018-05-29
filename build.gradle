@@ -13,7 +13,8 @@ project.ext {
         it.name == '1-hello-world' ||
         it.name == '1.1-hello-world-javascript' ||
         it.name == '2-eventbus' ||
-        it.name == '3-verticles'
+        it.name == '3-verticles' ||
+        it.name == '4-vertx-coroutines'
     }
 }
 
